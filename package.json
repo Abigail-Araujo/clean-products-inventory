@@ -1,0 +1,32 @@
+{
+  "name": "inventory",
+  "version": "1.0.0",
+  "description": "Node.js application for a cleaning products inventory management system.",
+  "main": "index.js",
+  "scripts": {
+    "buildcss": "npx @tailwindcss/cli -i ./input.css -o ./views/styles/output.css --watch",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Abigail Araujo",
+  "license": "ISC",
+  "keywords": [
+    "inventory",
+    "nodejs",
+    "management"
+  ],
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.8",
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.15.1",
+    "morgan": "^1.10.0",
+    "nodemailer": "^7.0.3",
+    "nodemon": "^3.1.10",
+    "tailwindcss": "^4.1.8"
+  }
+}

@@ -1,5 +1,6 @@
 const dotenv = require("dotenv");
 dotenv.config();
+const {PAGE_URL} = require("./config");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -7,13 +8,18 @@ const cors = require('cors');
 const path = require("path");
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const loginRouter = require("./controllers/login");
+const usersRouters = require("./controllers/users"); 
 
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: PAGE_URL,
   credentials: true
 }));
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Conectar con MongoDB
 (async () => {
@@ -42,11 +48,13 @@ app.use('/exits', express.static(path.resolve('views', 'exits')));
 app.use('/orders', express.static(path.resolve('views', 'orders')));
 app.use('/deliveryorders', express.static(path.resolve('views', 'deliveryorders')));
 app.use('/img', express.static(path.resolve('img')));
+app.use('/verify/:id/:token', express.static(path.resolve("views", "verify")));
 
 app.use(morgan('tiny'));
 
 // Rutas Backend
-
+app.use("/api/users", usersRouters);
+app.use("/api/login", loginRouter); 
 
 
 module.exports = app;

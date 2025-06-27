@@ -16,9 +16,6 @@ categorySchema.set("toJSON", {
   },
 });
 
-// Índice para mejorar el rendimiento de las búsquedas por nombre de categoría
-categorySchema.index({ category: 1 });
-
 const Category = mongoose.model("Category", categorySchema);
 
 module.exports = Category;

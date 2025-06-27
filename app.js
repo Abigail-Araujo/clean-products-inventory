@@ -55,6 +55,11 @@ app.use(morgan('tiny'));
 // Rutas Backend
 app.use("/api/users", usersRouters);
 app.use("/api/login", loginRouter); 
+app.use("/api/products", require("./controllers/products"));
+app.use("/api/categories", require("./controllers/categories"));
+// app.use("/api/movementreasons", require("./controllers/movementReasons"));
+// app.use("/api/inventorymovements", require("./controllers/inventoryMovements"));
+
 
 
 module.exports = app;

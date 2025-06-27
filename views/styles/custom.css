@@ -1,0 +1,66 @@
+/* Oculta las flechas de todos los inputs de tipo number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield; /* Propiedad estándar para mayor compatibilidad */
+}
+
+/* --- Personalización de Tom Select --- */
+.ts-control {
+  border-radius: 0.5rem !important;      /* rounded-lg */
+  background-color: #f9fafb !important;  /* bg-gray-50 */
+  border: 1px solid #d1d5db !important;  /* border-gray-300 */
+  color: #111827 !important;             /* text-gray-900 */
+  font-size: 0.875rem !important;        /* text-sm */
+  padding: 0.625rem 0.625rem !important; /* p-2.5 */
+  width: 100% !important;
+  min-height: unset !important;
+  box-shadow: none !important;
+}
+
+.ts-dropdown {
+  border-radius: 0.5rem !important;      /* rounded-lg */
+  background-color: #fff !important;
+  border: 1px solid #e5e7eb !important;  /* border-gray-200 */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+.ts-dropdown .option {
+  padding: 1rem 1.5rem !important;
+  color: #111827;
+  border-bottom: 1px solid #e5e7eb;
+  transition: background 0.2s;
+  font-size: 0.875rem;
+}
+
+.ts-dropdown .option.selected,
+.ts-dropdown .option.active {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.ts-dropdown .option[data-value=""] {
+  color: #9ca3af;
+  background-color: #f3f4f6;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Oculta la opción vacía en el dropdown de Tom Select */
+.ts-dropdown .option[data-value=""] {
+  display: none !important;
+}
+
+.dot {
+  transform: translateX(0);
+  transition: transform 0.2s;
+}
+.dot-checked {
+  transform: translateX(24px);
+}

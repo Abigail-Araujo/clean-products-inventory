@@ -1,7 +1,3 @@
-// ! pendiente de agregar la lógica de ordenamiento
-// ! pendiente de agregar la lógica de búsqueda
-// ! pendiente agregar la lógica del select de orden
-
 // Para los select se usa Tom Select
 let tomSelectAddInstance;
 let tomSelectOrderInstance;
@@ -139,7 +135,6 @@ async function renderProductTable(path) {
     const response = await axios.get(path);
     const products = response.data;
 
-
     // Limpia la tabla
     productList.innerHTML = "";
 
@@ -208,7 +203,7 @@ renderProductTable("/api/products");
 
 // Event listener barra de búsqueda
 searchInput.addEventListener("input", () => {
-  const searchTerm = searchInput.value.toLowerCase();
+  const searchTerm = searchInput.value.toLowerCase().trim();
   const products = productList.querySelectorAll(".product-item");
 
   products.forEach((product) => {

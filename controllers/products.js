@@ -36,19 +36,6 @@ productsRouter.get("/", async (req, res) => {
   }
 });
 
-// Get a product by name
-productsRouter.get("/:name", async (req, res) => {
-  try {
-    const products = await Product.find({ name: req.params.name }).populate("id_category");
-    if (!products || products.length === 0) {
-      return res.status(404).json({ message: "Productos no encontrados" });
-    }
-    res.status(200).json(products);
-  } catch (error) {
-    res.status(500).json({ message: "Error al obtener los productos", error });
-  }
-});
-
 // Create a new product
 productsRouter.post("/", async (req, res) => {
   try {
@@ -97,7 +84,7 @@ productsRouter.get("/category/:categoryId", async (req, res) => {
     if (!category) {
       return res.status(404).json({ message: "Categoría no encontrada" });
     }
-    const products = await Product.find({ id_category: category._id });
+    const products = await Product.find({ id_category: category._id }).populate("id_category");
     res.status(200).json(products);
   } catch (error) {
     res
@@ -109,7 +96,7 @@ productsRouter.get("/category/:categoryId", async (req, res) => {
 // Get products by stock status
 productsRouter.get("/stock/:stock", async (req, res) => {
   try {
-    const products = await Product.find({ stock: req.params.stock });
+    const products = await Product.find({ stock: req.params.stock }).populate("id_category");
     res.status(200).json(products);
   } catch (error) {
     res
@@ -131,7 +118,7 @@ productsRouter.get("/category/:categoryId/stock/:stock", async (req, res) => {
     const products = await Product.find({
       id_category: category._id,
       stock: req.params.stock,
-    });
+    }).populate("id_category");
     res.status(200).json(products);
   } catch (error) {
     res

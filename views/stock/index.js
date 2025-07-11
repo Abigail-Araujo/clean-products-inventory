@@ -1,6 +1,7 @@
 // Para los select se usa Tom Select
 let tomSelectAddInstance;
 let tomSelectOrderInstance;
+let tomSelectPresentationInstance;
 
 document.addEventListener("DOMContentLoaded", () => {
   tomSelectOrderInstance = new TomSelect("#order-select", {
@@ -73,10 +74,10 @@ async function loadPresentations() {
       idPresentation.appendChild(option);
     });
 
-    if (window.tomSelectPresentationInstance) {
-      window.tomSelectPresentationInstance.destroy();
+    if (tomSelectPresentationInstance) {
+      tomSelectPresentationInstance.destroy();
     }
-    window.tomSelectPresentationInstance = new TomSelect("#id_presentation", {
+    tomSelectPresentationInstance = new TomSelect("#id_presentation", {
       create: false,
       hidePlaceholder: true,
       allowEmptyOption: true,
@@ -288,6 +289,9 @@ closeModalAdd.addEventListener("click", () => {
   if (tomSelectAddInstance) {
     tomSelectAddInstance.clear(true);
   }
+  if (tomSelectPresentationInstance) {
+    tomSelectPresentationInstance.clear(true);
+  }
 });
 
 productForm.addEventListener("submit", async (e) => {
@@ -313,11 +317,14 @@ productForm.addEventListener("submit", async (e) => {
 
   try {
     await axios.post("/api/products", newProduct);
-    await renderProductTable(buildProductUrl()); // Refresca la tabla
+    await renderProductTable(buildProductUrl());
     closeModal(modalAdd);
     productForm.reset();
     if (tomSelectAddInstance) {
       tomSelectAddInstance.clear(true);
+    }
+    if (tomSelectPresentationInstance) {
+      tomSelectPresentationInstance.clear(true);
     }
   } catch (error) {
     alert(`Error al agregar el producto. ${error.response.data.message || ""}`);

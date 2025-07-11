@@ -1,6 +1,6 @@
 // This file contains auxiliary functions for sort
 
-const stockOrder = { Bajo: 1, Medio: 2, Alto: 3 };
+const stockOrder = { bajo: 1, medio: 2, alto: 3 };
 
 const sortAscending = (result, key) => {
   if (key === "stock") {

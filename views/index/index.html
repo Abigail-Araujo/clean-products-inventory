@@ -10,13 +10,110 @@
 </head>
 
 <body>
-    <header id="header" class="shadow mb-2">
+    <header id="header" class="shadow">
     </header>
     <main>
+        <section class="bg-blue-700 text-white py-16">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4 mt-4">Controla tu Inventario de Productos de
+                    Limpieza
+                </h1>
+                <p class="text-lg md:text-xl mb-8">Organiza, consulta y gestiona tu stock de manera eficiente y
+                    profesional.</p>
+                <a href="/login/"
+                    class="inline-block bg-white text-blue-700 px-8 py-3 rounded-3xl font-semibold shadow hover:bg-blue-100 transition">Inicia
+                    Sesión</a>
+            </div>
+        </section>
 
+        <section id="inventario" class="py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-blue-700 mb-8 text-center">Haz que tu inventario luzca así</h2>
+                <div class="flex justify-center">
+                    <img src="/img/inventario.png" alt="vista de inventario" class="w-72 md:w-164">
+                </div>
+            </div>
+        </section>
+
+        <!-- Productos Destacados -->
+        <!-- <section id="productos" class="py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-blue-700 mb-8 text-center">Productos Destacados</h2>
+                <div id="featured-products" class="grid gap-8 md:grid-cols-3">
+                    <!-- Los productos se insertan aquí con JS ->
+                </div>
+            </div>
+        </section> -->
+        <!-- Contacto -->
+        <section id="contacto" class="bg-blue-700 text-white py-12">
+            <div class="container mx-auto px-4 text-center">
+                <h3 class="text-2xl font-bold mb-4">¿Tienes dudas o necesitas asesoría?</h3>
+                <p class="mb-8">Contáctanos y te ayudaremos con tu inventario.</p>
+                <a href="mailto:contacto@todolimpio.com"
+                    class="bg-white text-blue-700 px-6 py-2 rounded-3xl font-semibold hover:bg-gray-300 transition">Escríbenos</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-100 text-center py-4 text-gray-600">
+            &copy; 2025 TodoLimpio. Todos los derechos reservados.
+        </footer>
     </main>
     <script src="/components/header.js"></script>
     <script src="index.js"></script>
+    <!-- Productos destacados con JS -->
+    <!-- <script>
+        const productos = [
+            {
+                nombre: "Limpiador Multiusos",
+                descripcion: "Ideal para todo tipo de superficies. Aroma fresco y duradero.",
+                imagen: "/img/producto1.jpg",
+                stock: "Alto"
+            },
+            {
+                nombre: "Desinfectante Antibacterial",
+                descripcion: "Elimina el 99.9% de bacterias y virus. Seguro para el hogar.",
+                imagen: "/img/producto2.jpg",
+                stock: "Medio"
+            },
+            {
+                nombre: "Detergente Ecológico",
+                descripcion: "Cuida el medio ambiente y tu ropa. Fórmula biodegradable.",
+                imagen: "/img/producto3.jpg",
+                stock: "Bajo"
+            }
+        ];
+
+        // Estilos de stock como en la app de inventario
+        function stockStyles(stock) {
+            switch (stock) {
+                case "Alto":
+                    return ["text-green-900", "bg-green-200"];
+                case "Medio":
+                    return ["text-orange-500", "bg-orange-300"];
+                case "Bajo":
+                    return ["text-red-700", "bg-red-200"];
+                default:
+                    return ["text-gray-900", "bg-gray-200"];
+            }
+        }
+        const contenedor = document.getElementById('featured-products');
+        productos.forEach(producto => {
+            const [textClass, bgClass] = stockStyles(producto.stock);
+            const card = document.createElement('div');
+            card.className = "bg-white rounded-lg shadow p-6 flex flex-col items-center";
+            card.innerHTML = `
+        <img src="${producto.imagen}" alt="${producto.nombre}" class="h-32 mb-4 rounded">
+        <h3 class="text-xl font-bold text-blue-700 mb-2">${producto.nombre}</h3>
+        <p class="text-gray-700 mb-4 text-center">${producto.descripcion}</p>
+        <span class="relative inline-block px-3 py-1 font-semibold ${textClass} leading-tight mb-4">
+          <span class="absolute inset-0 ${bgClass} opacity-50 rounded-full"></span>
+          <span class="relative">${producto.stock}</span>
+        </span>
+      `;
+            contenedor.appendChild(card);
+        });
+    </script> -->
 </body>
 
 </html>

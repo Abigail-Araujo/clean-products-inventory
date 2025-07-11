@@ -57,6 +57,9 @@ app.use("/api/users", usersRouters);
 app.use("/api/login", loginRouter); 
 app.use("/api/products", require("./controllers/products"));
 app.use("/api/categories", require("./controllers/categories"));
+app.use("/api/presentations", require("./controllers/presentations"));
+// app.use("/api/entries", require("./controllers/entries"));
+// app.use("/api/exits", require("./controllers/exits"));
 // app.use("/api/movementreasons", require("./controllers/movementReasons"));
 // app.use("/api/inventorymovements", require("./controllers/inventoryMovements"));
 

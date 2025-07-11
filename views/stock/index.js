@@ -23,20 +23,19 @@ const modalAdd = document.getElementById("add-product-modal");
 const productForm = document.getElementById("add-product-form");
 let productName = document.getElementById("name");
 let idCategory = document.getElementById("id_category");
-let presentation = document.getElementById("presentation");
+let idPresentation = document.getElementById("id_presentation");
 let quantity = document.getElementById("quantity");
 let price = document.getElementById("price");
 let quantityAlert = document.getElementById("quantityAlert");
 let description = document.getElementById("description");
 // elementos del modal ordenar productos
-const orderBtn = document.getElementById("order-btn");
 const orderModal = document.getElementById("order-product-modal");
 const openOrderModalBtn = document.getElementById("order-btn");
 const closeOrderModalBtn = document.getElementById("close-modal-order-btn");
 const orderForm = document.getElementById("order-form");
 const orderSelect = document.getElementById("order-select");
 let isOrdened = false; // Variable para saber si se ha ordenado
-let lastOrderValue = null; // Para guardar el último valor de orden
+let selectedOrder = "stock-asc"; // valor por defecto
 // elementos del modal filtrar productos
 const filterCategoryGroup = document.getElementById("filter-category-group");
 const filterModal = document.getElementById("filter-product-modal");
@@ -46,8 +45,55 @@ const filterForm = document.getElementById("filter-form");
 const clearFilterBtn = document.getElementById("clear-filter-btn");
 const applyFilterBtn = document.getElementById("apply-filter-btn");
 let filterApplied = false; // Variable para saber si se ha aplicado un filtro
+// Variables globales para el estado de filtro y orden
+let selectedStock = null;
+let selectedCategory = null;
 // elementos de la lista de productos
 const productList = document.getElementById("product-list");
+
+function buildProductUrl() {
+  const params = [];
+  if (selectedCategory) params.push(`category=${selectedCategory}`);
+  if (selectedStock) params.push(`stock=${selectedStock}`);
+  if (selectedOrder) params.push(`order=${selectedOrder}`);
+  return "/api/products" + (params.length ? "?" + params.join("&") : "");
+}
+
+// Cargar presentaciones al cargar la página
+async function loadPresentations() {
+  try {
+    const response = await axios.get("/api/presentations");
+    const presentations = response.data;
+
+    // Agrega las opciones de presentaciones al select
+    presentations.forEach((presentation) => {
+      const option = document.createElement("option");
+      option.value = presentation.id;
+      option.textContent = presentation.presentation;
+      idPresentation.appendChild(option);
+    });
+
+    if (window.tomSelectPresentationInstance) {
+      window.tomSelectPresentationInstance.destroy();
+    }
+    window.tomSelectPresentationInstance = new TomSelect("#id_presentation", {
+      create: false,
+      hidePlaceholder: true,
+      allowEmptyOption: true,
+      sortField: { field: "text", direction: "asc" },
+      placeholder: "Selecciona una presentación",
+      render: {
+        no_results: function () {
+          return `<div class="no-results py-2 px-4 text-gray-500">No se encontraron resultados</div>`;
+        },
+      },
+    });
+  } catch (error) {
+    console.error("Error al cargar las presentaciones:", error);
+  }
+}
+
+loadPresentations();
 
 // carga las categorías al cargar la página
 async function loadCategories() {
@@ -171,7 +217,7 @@ async function renderProductTable(path) {
           <p class="product-category text-gray-900 whitespace-no-wrap">${product.id_category?.category}</p>
         </td>
         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-          <p class="product-presentation text-gray-900 whitespace-no-wrap">${product.presentation}</p>
+          <p class="product-presentation text-gray-900 whitespace-no-wrap">${product.id_presentation?.presentation}</p>
         </td>
         <td class="px-5 py-5 bg-white text-sm border-b border-gray-200">
           <p class="product-price text-gray-900 whitespace-no-wrap">$${product.price}</p>
@@ -199,7 +245,7 @@ async function renderProductTable(path) {
 }
 
 // Llamar a la función para renderizar la tabla al cargar la página
-renderProductTable("/api/products");
+renderProductTable(buildProductUrl());
 
 // Event listener barra de búsqueda
 searchInput.addEventListener("input", () => {
@@ -250,7 +296,7 @@ productForm.addEventListener("submit", async (e) => {
   const newProduct = {
     name: productName.value,
     id_category: idCategory.value,
-    presentation: presentation.value,
+    id_presentation: idPresentation.value,
     quantity: Number(quantity.value),
     price: Number(price.value),
     quantityAlert: Number(quantityAlert.value),
@@ -267,14 +313,14 @@ productForm.addEventListener("submit", async (e) => {
 
   try {
     await axios.post("/api/products", newProduct);
-    await renderProductTable(); // Refresca la tabla
+    await renderProductTable(buildProductUrl()); // Refresca la tabla
     closeModal(modalAdd);
     productForm.reset();
     if (tomSelectAddInstance) {
       tomSelectAddInstance.clear(true);
     }
   } catch (error) {
-    alert("Error al agregar el producto");
+    alert(`Error al agregar el producto. ${error.response.data.message || ""}`);
     console.error(error);
   }
 });
@@ -290,7 +336,7 @@ const closeOrderModal = () => {
     tomSelectOrderInstance.setValue("stock-asc");
     return;
   }
-  tomSelectOrderInstance.setValue(lastOrderValue);
+  tomSelectOrderInstance.setValue(selectedOrder);
 };
 
 closeOrderModalBtn.addEventListener("click", () => {
@@ -301,9 +347,9 @@ orderForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const orderValue = orderSelect.value;
   if (orderValue) {
-    renderProductTable(`/api/products?order=${orderValue}`);
+    selectedOrder = orderValue;
+    renderProductTable(buildProductUrl());
     isOrdened = true;
-    lastOrderValue = orderSelect.value;
     closeOrderModal();
   } else {
     alert("Por favor, selecciona un orden.");
@@ -331,33 +377,17 @@ applyFilterBtn.addEventListener("click", (e) => {
     'input[name="filter-category"]'
   );
 
-  // Verifica si al menos un radio está seleccionado
   const isStockChecked = Array.from(stockRadios).find((radio) => radio.checked);
   const isCategoryChecked = Array.from(categoryRadios).find(
     (radio) => radio.checked
   );
 
-  const selectedStock = isStockChecked ? isStockChecked.value : null;
-  const selectedCategory = isCategoryChecked ? isCategoryChecked.value : null;
+  selectedStock = isStockChecked ? isStockChecked.value : null;
+  selectedCategory = isCategoryChecked ? isCategoryChecked.value : null;
 
-  if (!isStockChecked && !isCategoryChecked) {
-    renderProductTable("/api/products");
-    closeModal(filterModal);
-    return;
-  }
-  filterApplied = true;
+  filterApplied = !!(selectedStock || selectedCategory);
 
-  // Filtrar productos según los radios seleccionados
-  if (selectedStock && selectedCategory) {
-    renderProductTable(
-      `/api/products/category/${selectedCategory}/stock/${selectedStock}`
-    );
-  } else if (selectedStock) {
-    renderProductTable(`/api/products/stock/${selectedStock}`);
-  } else if (selectedCategory) {
-    renderProductTable(`/api/products/category/${selectedCategory}`);
-  }
-
+  renderProductTable(buildProductUrl());
   closeModal(filterModal);
 });
 
@@ -378,7 +408,11 @@ const removeFilter = () => {
 
 clearFilterBtn.addEventListener("click", () => {
   removeFilter();
+  selectedStock = null;
+  selectedCategory = null;
   filterApplied = false;
+  renderProductTable(buildProductUrl());
+  closeModal(filterModal);
 });
 
 // Radios de stock

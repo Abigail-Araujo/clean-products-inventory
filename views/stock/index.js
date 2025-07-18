@@ -199,37 +199,67 @@ async function renderProductTable(path) {
     // Agrega cada producto como fila
     products.forEach((product) => {
       const row = document.createElement("tr");
-      row.className = "product-item";
+      row.className = "product-item cursor-pointer bg-white hover:bg-gray-100";
+      row.dataset.productId = product.id;
 
       const [textClass, bgClass] = stockBgColor(product.stock);
 
       row.innerHTML = `
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        <td class="px-5 py-5 border-b border-gray-200 text-sm">
           <div class="flex items-center">
             <div class="ml-3">
               <p class="product-name text-gray-900 whitespace-no-wrap">${product.name}</p>
             </div>
           </div>
         </td>
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        <td class="px-5 py-5 border-b border-gray-200 text-sm">
           <p class="product-quantity text-gray-900 whitespace-no-wrap">${product.quantity}</p>
         </td>
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        <td class="px-5 py-5 border-b border-gray-200 text-sm">
           <p class="product-category text-gray-900 whitespace-no-wrap">${product.id_category?.category}</p>
         </td>
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        <td class="px-5 py-5 border-b border-gray-200 text-sm">
           <p class="product-presentation text-gray-900 whitespace-no-wrap">${product.id_presentation?.presentation}</p>
         </td>
-        <td class="px-5 py-5 bg-white text-sm border-b border-gray-200">
+        <td class="px-5 py-5 text-sm border-b border-gray-200">
           <p class="product-price text-gray-900 whitespace-no-wrap">$${product.price}</p>
         </td>
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        <td class="px-5 py-5 border-b border-gray-200 text-sm">
           <span class="relative inline-block px-3 py-1 font-semibold ${textClass} leading-tight">
             <span class="absolute inset-0 ${bgClass} opacity-50 rounded-full"></span>
             <span class="product-stock relative">${product.stock}</span>
           </span>
         </td>
       `;
+
+      // Evento para abrir el modal de edición
+      row.addEventListener("click", async (e) => {
+        const productId = e.currentTarget.dataset.productId;
+        const response = await axios.get(`/api/products/${productId}`);
+        const prod = response.data;
+
+        productName.value = prod.name;
+        tomSelectAddInstance.setValue(prod.id_category?.id);
+        tomSelectPresentationInstance.setValue(prod.id_presentation?.id);
+        quantity.value = prod.quantity;
+        price.value = prod.price;
+        quantityAlert.value = prod.quantityAlert;
+        description.value = prod.description;
+
+        productForm.dataset.productId = productId;
+
+        document.getElementById("edit-product-btn").classList.remove("hidden");
+        document
+          .getElementById("delete-product-btn")
+          .classList.remove("hidden");
+        addBtn.classList.add("hidden");
+        document.getElementById("quantity-group").classList.add("hidden");
+        document.getElementById("modalAdd-title").textContent =
+          "Editar producto";
+
+        openModal(modalAdd);
+      });
+
       productList.appendChild(row);
     });
   } catch (error) {
@@ -247,6 +277,74 @@ async function renderProductTable(path) {
 
 // Llamar a la función para renderizar la tabla al cargar la página
 renderProductTable(buildProductUrl());
+
+// Event listener para editar producto
+document
+  .getElementById("edit-product-btn")
+  .addEventListener("click", async () => {
+    const productId = productForm.dataset.productId;
+    const updatedProduct = {
+      name: productName.value,
+      id_category: idCategory.value,
+      id_presentation: idPresentation.value,
+      quantity: Number(quantity.value),
+      price: Number(price.value),
+      quantityAlert: Number(quantityAlert.value),
+      description: description.value,
+    };
+
+    try {
+      await axios.patch(`/api/products/${productId}`, updatedProduct);
+      await renderProductTable(buildProductUrl());
+      closeModal(modalAdd);
+      productForm.reset();
+      if (tomSelectAddInstance) tomSelectAddInstance.clear(true);
+      if (tomSelectPresentationInstance)
+        tomSelectPresentationInstance.clear(true);
+      document.getElementById("edit-product-btn").classList.add("hidden");
+      document.getElementById("delete-product-btn").classList.add("hidden");
+      addBtn.classList.remove("hidden");
+      document.getElementById("quantity-group").classList.remove("hidden");
+      document.getElementById("modalAdd-title").textContent =
+        "Crear nuevo producto";
+    } catch (error) {
+      alert(
+        `Error al editar el producto. ${error.response.data.message || ""}`
+      );
+      console.error(error);
+    }
+  });
+
+// Event listener para eliminar producto
+document
+  .getElementById("delete-product-btn")
+  .addEventListener("click", async () => {
+    const productId = productForm.dataset.productId;
+    if (!productId) return;
+
+    if (!confirm("¿Seguro que deseas eliminar este producto?")) return;
+
+    try {
+      await axios.delete(`/api/products/${productId}`);
+      await renderProductTable(buildProductUrl());
+      closeModal(modalAdd);
+      productForm.reset();
+      if (tomSelectAddInstance) tomSelectAddInstance.clear(true);
+      if (tomSelectPresentationInstance)
+        tomSelectPresentationInstance.clear(true);
+      document.getElementById("edit-product-btn").classList.add("hidden");
+      document.getElementById("delete-product-btn").classList.add("hidden");
+      addBtn.classList.remove("hidden");
+      document.getElementById("quantity-group").classList.remove("hidden");
+      document.getElementById("modalAdd-title").textContent =
+        "Crear nuevo producto";
+    } catch (error) {
+      alert(
+        `Error al eliminar el producto. ${error.response?.data?.message || ""}`
+      );
+      console.error(error);
+    }
+  });
 
 // Event listener barra de búsqueda
 searchInput.addEventListener("input", () => {
@@ -278,13 +376,19 @@ const closeModal = (modal) => {
 
 displayModalAdd.addEventListener("click", () => {
   openModal(modalAdd);
+  document.getElementById("edit-product-btn").classList.add("hidden");
+  document.getElementById("delete-product-btn").classList.add("hidden");
+  addBtn.classList.remove("hidden");
+  document.getElementById("quantity-group").classList.remove("hidden");
 });
 
 closeModalAdd.addEventListener("click", () => {
   closeModal(modalAdd);
 
   // Limpiar el formulario al cerrar el modal
-  document.getElementById("product-form").reset();
+  productForm.reset();
+  document.getElementById("modalAdd-title").textContent =
+    "Crear nuevo producto";
 
   if (tomSelectAddInstance) {
     tomSelectAddInstance.clear(true);
@@ -305,14 +409,6 @@ productForm.addEventListener("submit", async (e) => {
     price: Number(price.value),
     quantityAlert: Number(quantityAlert.value),
     description: description.value,
-    // Calcula el stock según la cantidad
-    stock:
-      Number(quantity.value) <= Number(quantityAlert.value)
-        ? "Bajo"
-        : Number(quantity.value) <=
-          Number(quantityAlert.value) + Number(quantityAlert.value) * 0.5
-        ? "Medio"
-        : "Alto",
   };
 
   try {

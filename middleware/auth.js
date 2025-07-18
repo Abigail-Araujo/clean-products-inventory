@@ -6,7 +6,7 @@ const userExtractor = async (request, response, next) => {
     const token = request.cookies?.accessToken;
 
     if (!token) {
-      return response.sendStatus(401);
+      return response.redirect("/");
     }
 
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
@@ -14,7 +14,7 @@ const userExtractor = async (request, response, next) => {
     request.user = user;
     next();
   } catch (error) {
-    return response.sendStatus(403);
+    return response.redirect("/");
   }
 };
 

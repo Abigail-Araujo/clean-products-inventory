@@ -1,13 +1,15 @@
-const PAGE_URL = process.env.NODE_ENV === 'production'
-    ? 'placeholder'
+const PAGE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://todolimpio.onrender.com"
     : process.env.LOCAL_URL;
 
-    // PAGE_URL is used to set the endpoint for the application
-    //Windows endpoint = http://localhost:3000
-    //Mac endpoint =  http://127.0.0.1:3000
+// PAGE_URL is used to set the endpoint for the application
+//Windows endpoint = http://localhost:3000
+//Mac endpoint =  http://127.0.0.1:3000
 
-//  const MONGO_URI = process.env.NODE_ENV === 'production'
-//      ? process.env.MONGO_URI_PROD
-//      : process.env.MONGO_URI_TEST
+const MONGO_URI =
+  process.env.NODE_ENV === "production"
+    ? process.env.MONGO_URI_PROD
+    : process.env.MONGO_URI_TEST;
 
- module.exports = {PAGE_URL} ;
+module.exports = { PAGE_URL };

@@ -49,6 +49,7 @@ app.use('/exits', userExtractor, express.static(path.resolve('views', 'exits')))
 app.use('/orders', userExtractor, express.static(path.resolve('views', 'orders')));
 app.use('/deliveryorders', userExtractor, express.static(path.resolve('views', 'deliveryorders')));
 app.use('/configproducts', userExtractor, express.static(path.resolve('views', 'configproducts')));
+app.use('/inventoryMovements', userExtractor, express.static(path.resolve('views', 'inventoryMovements')));
 app.use('/img', express.static(path.resolve('img')));
 app.use('/verify/:id/:token', express.static(path.resolve("views", "verify")));
 

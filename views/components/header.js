@@ -133,13 +133,8 @@ if (header) {
               </a>
             </li>
             <li class="w-full">
-              <a href="/entries/" class="block w-full text-center px-5 py-4 text-lg font-medium rounded-2xl border-2 border-blue-700 text-blue-700 bg-white hover:bg-blue-50 transition">
-                Entradas
-              </a>
-            </li>
-            <li class="w-full">
-              <a href="/exits/" class="block w-full text-center px-5 py-4 text-lg font-medium rounded-2xl border-2 border-blue-700 text-blue-700 bg-white hover:bg-blue-50 transition">
-                Salidas
+              <a href="/inventoryMovements/" class="block w-full text-center px-5 py-4 text-lg font-medium rounded-2xl border-2 border-blue-700 text-blue-700 bg-white hover:bg-blue-50 transition">
+                Movimientos
               </a>
             </li>
             <li class="w-full">

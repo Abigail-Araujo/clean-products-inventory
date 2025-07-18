@@ -108,7 +108,6 @@ productsRouter.patch("/:id", async (req, res) => {
     if (!updatedProduct) {
       return res.status(404).json({ message: "Producto no encontrado" });
     }
-    console.log("Producto actualizado:", updatedProduct);
     res.status(200).json(updatedProduct);
   } catch (error) {
     if (error.code === 11000) {

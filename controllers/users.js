@@ -58,9 +58,13 @@ usersRouters.post("/", async (req, res) => {
       subject: "Verificacion de usuario",
       html: `
         <div style="font-family: Arial, sans-serif; background: #f4f6fb; padding: 0; padding-bottom: 20px; margin: 0;">
-        <div style="background: #1976d2; padding: 48px 0 16px 0; text-align: center; justify-content: center; display: flex;">
-            <img src="${PAGE_URL}/img/logo.png" alt="Logo TodoLimpio" style="height: 60px; margin-bottom: 12px;">
-            <h1 style="color: #fff; font-size: 2rem; margin: 0;">TodoLimpio</h1>
+        <div style="background: #1976d2; padding: 48px 0 16px 0; text-align: center;">
+          <span style="display: inline-block; vertical-align: middle;">
+            <img src="${PAGE_URL}/img/logo.png" alt="Logo TodoLimpio" style="height: 60px; margin-right: 16px; vertical-align: middle;">
+          </span>
+          <span style="display: inline-block; vertical-align: middle;">
+            <h1 style="color: #fff; font-size: 2rem; margin: 0; display: inline-block; vertical-align: middle;">TodoLimpio</h1>
+          </span>
         </div>
         <div style="background: #fff; max-width: 480px; margin: 32px auto; border-radius: 12px; box-shadow: 0 2px 8px #1976d233; padding: 32px 24px; text-align: center;">
             <h2 style="color: #1976d2; margin-bottom: 16px;">¡Bienvenido, ${name}!</h2>
@@ -134,9 +138,13 @@ usersRouters.patch("/:id/:token", async (req, res) => {
       subject: "Verificacion de usuario",
       html: `
         <div style="font-family: Arial, sans-serif; background: #f4f6fb; padding: 0; padding-bottom: 20px; margin: 0;">
-        <div style="background: #1976d2; padding: 48px 0 16px 0; text-align: center; justify-content: center; display: flex;">
-            <img src="${PAGE_URL}/img/logo.png" alt="Logo TodoLimpio" style="height: 60px; margin-bottom: 12px;">
-            <h1 style="color: #fff; font-size: 2rem; margin: 0;">TodoLimpio</h1>
+        <div style="background: #1976d2; padding: 48px 0 16px 0; text-align: center;">
+          <span style="display: inline-block; vertical-align: middle;">
+            <img src="${PAGE_URL}/img/logo.png" alt="Logo TodoLimpio" style="height: 60px; margin-right: 16px; vertical-align: middle;">
+          </span>
+          <span style="display: inline-block; vertical-align: middle;">
+            <h1 style="color: #fff; font-size: 2rem; margin: 0; display: inline-block; vertical-align: middle;">TodoLimpio</h1>
+          </span>
         </div>
         <div style="background: #fff; max-width: 480px; margin: 32px auto; border-radius: 12px; box-shadow: 0 2px 8px #1976d233; padding: 32px 24px; text-align: center;">
             <h2 style="color: #1976d2; margin-bottom: 16px;">¡Bienvenido, ${name}!</h2>

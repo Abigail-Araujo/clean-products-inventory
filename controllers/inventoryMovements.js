@@ -15,12 +15,10 @@ inventoryMovementRouter.get("/", async (req, res) => {
       .sort({ createdAt: -1 }); // Orden descendente (más reciente primero)
     res.json(movements);
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: "Error al obtener los movimientos de inventario",
-        error,
-      });
+    res.status(500).json({
+      message: "Error al obtener los movimientos de inventario",
+      error,
+    });
   }
 });
 
@@ -44,16 +42,27 @@ inventoryMovementRouter.post("/", userExtractor, async (req, res) => {
     } else if (reason.type === "salida") {
       nuevaCantidad -= Number(quantity);
       if (nuevaCantidad < 0) {
-        return res
-          .status(400)
-          .json({
-            message: "No hay suficiente stock para realizar la salida.",
-          });
+        return res.status(400).json({
+          message: "No hay suficiente stock para realizar la salida.",
+        });
       }
     }
 
     // Actualiza la cantidad del producto
     product.quantity = nuevaCantidad;
+    // Actualiza el stock según la nueva cantidad y el quantityAlert
+    if (typeof product.quantityAlert !== "undefined") {
+      if (product.quantity <= product.quantityAlert) {
+        product.stock = "Bajo";
+      } else if (
+        product.quantity <=
+        product.quantityAlert + product.quantityAlert * 0.5
+      ) {
+        product.stock = "Medio";
+      } else {
+        product.stock = "Alto";
+      }
+    }
     await product.save();
 
     // Crea el movimiento
@@ -62,7 +71,7 @@ inventoryMovementRouter.post("/", userExtractor, async (req, res) => {
       id_reason,
       quantity,
       description,
-      id_user: req.user._id
+      id_user: req.user._id,
     });
     const savedMovement = await movement.save();
 

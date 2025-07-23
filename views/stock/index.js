@@ -293,6 +293,21 @@ document
       description: description.value,
     };
 
+    // Validación: ningún campo puede estar vacío
+    if (
+      !updatedProduct.name ||
+      !updatedProduct.id_category ||
+      !updatedProduct.id_presentation ||
+      !updatedProduct.quantity ||
+      !updatedProduct.price ||
+      !updatedProduct.quantityAlert
+    ) {
+      alert(
+        "Por favor, completa todos los campos obligatorios antes de guardar."
+      );
+      return;
+    }
+
     try {
       await axios.patch(`/api/products/${productId}`, updatedProduct);
       await renderProductTable(buildProductUrl());

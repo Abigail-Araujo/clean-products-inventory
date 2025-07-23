@@ -4,7 +4,6 @@ const movementReasonSchema = new mongoose.Schema({
   reason: {
     type: String,
     required: [true, "El motivo es obligatorio."],
-    unique: true, // Cada motivo debe ser único
   },
   type: {
     type: String,

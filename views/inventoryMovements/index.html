@@ -92,7 +92,7 @@
                     </form>
                 </div>
             </div>
-            <div id="order-movement-modal"
+            <!-- <div id="order-movement-modal"
                 class="fixed left-0 top-0 w-[100vw] h-[100vh] bg-gray-400/70 z-50 justify-center items-start overflow-y-auto hidden">
                 <div tabindex="-1" class="bg-white rounded-lg shadow-sm max-w-md w-full p-6 mt-12 mb-12">
                     <div class="flex items-center justify-between pb-4 border-b border-gray-200">
@@ -127,17 +127,17 @@
                         </button>
                     </form>
                 </div>
-            </div>
+            </div> -->
             <div class="flex items-center justify-center p-4 space-x-4">
                 <select id="movement-type-filter" class="bg-gray-100 rounded-3xl px-4 py-2 w-1/5 hover:cursor-pointer">
-                    <option value="">Todos</option>
+                    <option value="todos">Todos</option>
                     <option value="entrada">Entradas</option>
                     <option value="salida">Salidas</option>
                 </select>
                 <input type="text" id="search-movement-input" placeholder="Buscar producto..."
                     class="bg-gray-100 rounded-3xl px-4 py-2 w-2/4" autocomplete="off">
                 <button id="display-modal-add-movement-btn"
-                    class="flex bg-blue-500 text-white hover:bg-blue-700 hover:cursor-pointer px-4 py-2 rounded-3xl items-center w-1/5">
+                    class="flex bg-blue-500 text-white hover:bg-blue-700 hover:cursor-pointer px-4 py-2 rounded-3xl items-center w-40">
                     <svg width="30" height="26" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="11" cy="13" r="11" fill="white" />
                         <line x1="11" y1="7" x2="11" y2="19" stroke="#1976d2" stroke-width="2" stroke-linecap="round" />
@@ -145,13 +145,13 @@
                     </svg>
                     Agregar Mov.
                 </button>
-                <button id="order-movement-btn"
+                <!-- <button id="order-movement-btn"
                     class="flex bg-black text-white hover:bg-blue-700 hover:cursor-pointer px-4 py-2 rounded-3xl">
                     <svg width="24" height="26" viewBox="0 0 24 26" xmlns="http://www.w3.org/2000/svg">
                         <polygon points="0,8 16,8 8,20" fill="white" />
                     </svg>
                     Ordenar
-                </button>
+                </button> -->
             </div>
         </div>
         <!-- end component -->
@@ -175,7 +175,7 @@
                                 </th>
                                 <th
                                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Cantidad
+                                    Cant.
                                 </th>
                                 <th
                                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">

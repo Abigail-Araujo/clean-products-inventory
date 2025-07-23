@@ -298,7 +298,6 @@ document
       !updatedProduct.name ||
       !updatedProduct.id_category ||
       !updatedProduct.id_presentation ||
-      !updatedProduct.quantity ||
       !updatedProduct.price ||
       !updatedProduct.quantityAlert
     ) {

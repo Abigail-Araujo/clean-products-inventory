@@ -89,7 +89,7 @@ productsRouter.patch("/:id", async (req, res) => {
     // Normaliza los campos a minúsculas
     if (req.body.name) req.body.name = req.body.name.toLowerCase();
     if (req.body.description) req.body.description = req.body.description.toLowerCase();
-    if (req.body.stock) req.body.stock = req.body.stock.toLowerCase();
+    if (req.body.stock) req.body.stock = req.body.stock;
 
     const { quantity, quantityAlert } = req.body;
     let stock = "Alto";

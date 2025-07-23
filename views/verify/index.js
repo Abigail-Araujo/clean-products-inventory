@@ -6,6 +6,7 @@ const textInfo = document.getElementById('textInfo');
         const token = window.location.pathname.split('/')[3];
         const id = window.location.pathname.split('/')[2];
         const {data} = await axios.patch(`/api/users/${id}/${token}`);
+        
         textInfo.innerHTML = data.message;
 
         setTimeout(() => {

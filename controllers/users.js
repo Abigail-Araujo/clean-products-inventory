@@ -67,7 +67,7 @@ usersRouters.post("/", async (req, res) => {
             <p style="color: #333; font-size: 1.1rem; margin-bottom: 24px;">
             Gracias por registrarte en <b>TodoLimpio</b>. Para activar tu cuenta y comenzar a gestionar tu inventario, por favor verifica tu correo haciendo clic en el siguiente botón:
             </p>
-            <a href="${PAGE_URL}/verify/${id}/${token}" 
+            <a href="${PAGE_URL}/verify/${savedUser.id}/${token}" 
             style="display: inline-block; background: #1976d2; color: #fff; font-weight: bold; font-size: 1.1rem; padding: 14px 32px; border-radius: 32px; text-decoration: none; margin: 24px 0; box-shadow: 0 2px 8px #1976d233;">
             Verificar mi correo
             </a>
@@ -143,7 +143,7 @@ usersRouters.patch("/:id/:token", async (req, res) => {
             <p style="color: #333; font-size: 1.1rem; margin-bottom: 24px;">
             Gracias por registrarte en <b>TodoLimpio</b>. Para activar tu cuenta y comenzar a gestionar tu inventario, por favor verifica tu correo haciendo clic en el siguiente botón:
             </p>
-            <a href="${PAGE_URL}/verify/${savedUser.id}/${token}" 
+            <a href="${PAGE_URL}/verify/${id}/${token}" 
             style="display: inline-block; background: #1976d2; color: #fff; font-weight: bold; font-size: 1.1rem; padding: 14px 32px; border-radius: 32px; text-decoration: none; margin: 24px 0; box-shadow: 0 2px 8px #1976d233;">
             Verificar mi correo
             </a>

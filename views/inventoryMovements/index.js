@@ -121,7 +121,7 @@ async function loadReasons() {
       const option = document.createElement("option");
       option.value = reason.id;
       option.className = `${reason.type}`;
-      option.textContent = reason.reason + " (" + reason.type + ")";
+      option.textContent = reason.reason;
       movementReason.appendChild(option);
     });
     tomSelectReasonInstance.clearOptions();

@@ -27,7 +27,6 @@ const productSchema = new mongoose.Schema({
 productSchema.pre("save", function (next) {
   if (this.name) this.name = this.name.toLowerCase();
   if (this.description) this.description = this.description.toLowerCase();
-  if (this.stock) this.stock = this.stock;
   next();
 });
 

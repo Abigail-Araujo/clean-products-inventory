@@ -81,7 +81,7 @@ usersRouters.patch('/:id/:token' , async (req, res) =>{
   const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
   const id = decodedToken.id;
   await User.findByIdAndUpdate(id, {verified: true});
-  return res.sendStatus(200).json({message: "Usuario verificado correctamente. Redirigiendo a la pagina de login..."});
+  return res.status(200).json({message: "Usuario verificado correctamente. Redirigiendo a la pagina de login..."});
  } catch (error) {
     //Encontrar el mail del usuario
     const id = req.params.id;

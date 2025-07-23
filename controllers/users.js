@@ -58,7 +58,7 @@ usersRouters.post("/", async (req, res) => {
       subject: "Verificacion de usuario",
       html: `
         <div style="font-family: Arial, sans-serif; background: #f4f6fb; padding: 0; padding-bottom: 20px; margin: 0;">
-        <div style="background: #1976d2; padding: 48px 0 16px 0; text-align: center;">
+        <div style="background: #1976d2; padding: 32px 0 16px 0; text-align: center;">
           <span style="display: inline-block; vertical-align: middle;">
             <img src="${PAGE_URL}/img/logo.png" alt="Logo TodoLimpio" style="height: 60px; margin-right: 16px; vertical-align: middle;">
           </span>

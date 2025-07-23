@@ -1,6 +1,6 @@
 # TodoLimpio - Sistema de Inventario
 
-Es una aplicación web para la gestión de inventario de TodoLimpio, pensada para negocios que necesitan controlar productos de limpieza, entradas, salidas y movimientos de manera sencilla y eficiente.
+Es una aplicación web para la gestión de inventario de TodoLimpio, pensada para negocios que necesitan controlar productos de limpieza y sus movimientos (entradas, salidas) de manera sencilla y eficiente.
 
 ## Características
 
@@ -39,10 +39,13 @@ Es una aplicación web para la gestión de inventario de TodoLimpio, pensada par
 
    ```
    MONGO_URI_TEST=tu_uri_mongodb
+   USERMONGODB=tu_user_mongodb
+   USERMONGODB_PASSWORD=tu_password_mongodb
    ACCESS_TOKEN_SECRET=tu_secreto_jwt
    EMAIL_USER=tu_correo@gmail.com
    EMAIL_PASS=tu_contraseña_app
    PAGE_URL=http://localhost:3000
+   NODE_ENV=dev
    ```
 
 4. Inicia el servidor:
@@ -51,7 +54,6 @@ Es una aplicación web para la gestión de inventario de TodoLimpio, pensada par
    npm run dev
    ```
 
-```markdown
 - Para desarrollo utiliza: `npm run dev`
 
 - Para producción utiliza: `npm run start`
@@ -65,6 +67,7 @@ Es una aplicación web para la gestión de inventario de TodoLimpio, pensada par
 - Puedes ordenar los productos por estado de stock y otros criterios desde la vista de inventario.
 
 ## Estructura del proyecto
+
 ```
 
 inventoryapp/
@@ -108,8 +111,5 @@ Haz un fork, crea tu rama y envía un pull request.
 
 MIT
 
----
-
 **Contacto:**
 Si tienes dudas o sugerencias, puedes escribir a [abiaraujo2004@gmail.com](mailto:abiaraujo2004@gmail.com)
-```

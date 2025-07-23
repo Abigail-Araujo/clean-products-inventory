@@ -4,7 +4,7 @@ const stockOrder = { bajo: 1, medio: 2, alto: 3 };
 
 const sortAscending = (result, key) => {
   if (key === "stock") {
-    return result.sort((a, b) => stockOrder[a[key]] - stockOrder[b[key]]);
+    return result.sort((a, b) => stockOrder[a[key]?.toLowerCase()] - stockOrder[b[key]?.toLowerCase()]);
   }
   if (key === "category") {
     return result.sort((a, b) =>
@@ -23,7 +23,7 @@ const sortAscending = (result, key) => {
 
 const sortDescending = (result, key) => {
   if (key === "stock") {
-    return result.sort((a, b) => stockOrder[b[key]] - stockOrder[a[key]]);
+    return result.sort((a, b) => stockOrder[b[key]?.toLowerCase()] - stockOrder[a[key]?.toLowerCase()]);
   }
   if (key === "category") {
     return result.sort((a, b) =>

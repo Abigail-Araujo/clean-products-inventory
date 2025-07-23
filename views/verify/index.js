@@ -11,7 +11,7 @@ const textInfo = document.getElementById('textInfo');
         setTimeout(() => {
             window.location.pathname = '/login/';
         }
-        , 2000);
+        , 4000);
 
     } catch (error) {
         textInfo.innerHTML = error.response.data.error;

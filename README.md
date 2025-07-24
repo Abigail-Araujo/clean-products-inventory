@@ -2,6 +2,17 @@
 
 Es una aplicación web para la gestión de inventario de TodoLimpio, pensada para negocios que necesitan controlar productos de limpieza y sus movimientos (entradas, salidas) de manera sencilla y eficiente.
 
+## Demo
+
+[Ver demo en línea](https://todolimpio.onrender.com)
+
+## ¿Cómo funciona?
+
+1. Regístrate y verifica tu cuenta por correo.
+2. Agrega productos y define sus categorías y presentaciones.
+3. Registra entradas y salidas de inventario.
+4. Filtra y ordena los productos según tus necesidades.
+
 ## Características
 
 - Registro y verificación de usuarios por correo electrónico.
@@ -113,3 +124,7 @@ MIT
 
 **Contacto:**
 Si tienes dudas o sugerencias, puedes escribir a [abiaraujo2004@gmail.com](mailto:abiaraujo2004@gmail.com)
+
+## Autor 👩🏻‍💻
+
+[Abigail Araujo](https://github.com/Abigail-Araujo)

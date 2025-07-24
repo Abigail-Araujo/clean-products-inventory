@@ -1,19 +1,19 @@
-# TodoLimpio - Sistema de Inventario
+# TodoLimpio - Sistema de Inventario 📦🧴
 
 Es una aplicación web para la gestión de inventario de TodoLimpio, pensada para negocios que necesitan controlar productos de limpieza y sus movimientos (entradas, salidas) de manera sencilla y eficiente.
 
-## Demo
+## Demo 🚀
 
 [Ver demo en línea](https://todolimpio.onrender.com)
 
-## ¿Cómo funciona?
+## ¿Cómo funciona? 📝
 
 1. Regístrate y verifica tu cuenta por correo.
 2. Agrega productos y define sus categorías y presentaciones.
 3. Registra entradas y salidas de inventario.
 4. Filtra y ordena los productos según tus necesidades.
 
-## Características
+## Características ✨
 
 - Registro y verificación de usuarios por correo electrónico.
 - Gestión de productos, categorías y presentaciones.
@@ -24,14 +24,14 @@ Es una aplicación web para la gestión de inventario de TodoLimpio, pensada par
 - Interfaz moderna y responsiva con Tailwind CSS, compatible con escritorio y tablet (no optimizada para teléfonos móviles).
 - Envío de correos automáticos para verificación de cuenta.
 
-## Tecnologías
+## Tecnologías 🛠
 
 - **Backend:** Node.js, Express, MongoDB, Mongoose, JWT, Nodemailer, bcrypt
 - **Frontend:** HTML, CSS (Tailwind), JavaScript, Tom Select, Axios
 - **Autenticación:** JWT
 - **Correo:** Nodemailer + Gmail SMTP
 
-## Instalación
+## Instalación ⚙️
 
 1. Clona el repositorio:
 
@@ -69,7 +69,7 @@ Es una aplicación web para la gestión de inventario de TodoLimpio, pensada par
 
 - Para producción utiliza: `npm run start`
 
-## Uso
+## Uso 🖥️
 
 - Accede a la aplicación en [http://localhost:3000](http://localhost:3000).
 - Regístrate y verifica tu cuenta desde el correo recibido.
@@ -77,7 +77,7 @@ Es una aplicación web para la gestión de inventario de TodoLimpio, pensada par
 - Filtra y busca movimientos por tipo y nombre de producto.
 - Puedes ordenar los productos por estado de stock y otros criterios desde la vista de inventario.
 
-## Estructura del proyecto
+## Estructura del proyecto 📁
 
 ```
 
@@ -113,16 +113,16 @@ inventoryapp/
 
 ```
 
-## Contribución
+## Contribución 🤝🏻
 
 ¿Quieres mejorar TodoLimpio?
 Haz un fork, crea tu rama y envía un pull request.
 
-## Licencia
+## Licencia 📄
 
 MIT
 
-**Contacto:**
+**Contacto:** 📬
 Si tienes dudas o sugerencias, puedes escribir a [abiaraujo2004@gmail.com](mailto:abiaraujo2004@gmail.com)
 
 ## Autor 👩🏻‍💻
